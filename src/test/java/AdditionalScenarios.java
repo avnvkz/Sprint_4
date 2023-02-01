@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 public class AdditionalScenarios {
     private WebDriver driver;
-    private static String urlYandexMainPage = "https://ya.ru/";
+    private static final String urlYandexMainPage = "https://ya.ru/";
 
     @Before
     public void getStarted() {
@@ -46,9 +46,6 @@ public class AdditionalScenarios {
         //сравнить URL текущей страницы с URL главной страницы Яндекса
         assertEquals(urlYandexMainPage, driver.getCurrentUrl());
     }
-
-    @Test
-    public void
 
     @After
     public void teardown() {

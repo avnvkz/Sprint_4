@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.After;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import ru.yandex.practicum.model.OrderPage;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
@@ -15,7 +15,6 @@ public class MainPageTest {
     private WebDriver driver;
     private final String question;
     private final String expectedAnswer;
-    private String actualAnswer;
 
     public MainPageTest(String question, String answer) {
         this.question = question;
@@ -52,7 +51,7 @@ public class MainPageTest {
         //прокрутка страницы к разделу с вопросами FAQ
         objMainPage.goToFAQ();
         //поиск элемента с текстом вопроса
-        actualAnswer = objMainPage.getAnswerToQuestion(question);
+        String actualAnswer = objMainPage.getAnswerToQuestion(question);
         //проверка: ожидаемый ответ соответствует фактическому ответу
         assertEquals("Текст ответа соответствует вопросу", expectedAnswer, actualAnswer);
     }

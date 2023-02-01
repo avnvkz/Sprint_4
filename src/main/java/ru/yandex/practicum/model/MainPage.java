@@ -10,13 +10,13 @@ import java.time.Duration;
 
 public class MainPage {
 
-    private static final String URL = "https://qa-scooter.praktikum-services.ru/";
+    private static final String url = "https://qa-scooter.praktikum-services.ru/";
     //раздел с вопросами и ответами
-    private By SECTION_OF_FAQ = By.xpath(".//div[@class = 'Home_FAQ__3uVm4']");
+    private final By sectionOfFAQS = By.xpath(".//div[@class = 'Home_FAQ__3uVm4']");
     //кнопка "Заказать" в заголовке страницы
-    private By HEADER_ORDER_BUTTON = By.xpath(".//button[@class ='Button_Button__ra12g']");
+    private final By headerOrderButton = By.xpath(".//button[@class ='Button_Button__ra12g']");
     //дублирующая кнопка "Заказать" внизу страницы
-    private By DOWN_ORDER_BUTTON = By.xpath(".//button[@class ='Button_Button__ra12g Button_Middle__1CSJM']");
+    private final By downOrderButton = By.xpath(".//button[@class ='Button_Button__ra12g Button_Middle__1CSJM']");
     private final WebDriver driver;
 
     public MainPage(WebDriver driver) {
@@ -24,11 +24,11 @@ public class MainPage {
     }
 
     public void open() {
-        driver.get(URL);
+        driver.get(url);
     }
 
     public String getURL() {
-        return URL;
+        return url;
     }
 
     public void waitElementLoadOnPage (By element) {
@@ -40,8 +40,8 @@ public class MainPage {
     }
 
     public void goToFAQ () {
-        waitElementLoadOnPage(SECTION_OF_FAQ);
-        scrollPage(SECTION_OF_FAQ);
+        waitElementLoadOnPage(sectionOfFAQS);
+        scrollPage(sectionOfFAQS);
     }
 
     public String getAnswerToQuestion (String question) {
@@ -51,21 +51,24 @@ public class MainPage {
     }
 
     public void orderFromHead() {
-        waitElementLoadOnPage(HEADER_ORDER_BUTTON);
-        driver.findElement(HEADER_ORDER_BUTTON).click();
+        waitElementLoadOnPage(headerOrderButton);
+        driver.findElement(headerOrderButton).click();
     }
 
     public void orderFromDownPage() {
-        waitElementLoadOnPage(DOWN_ORDER_BUTTON);
-        scrollPage(DOWN_ORDER_BUTTON);
-        driver.findElement(DOWN_ORDER_BUTTON).click();
+        waitElementLoadOnPage(downOrderButton);
+        scrollPage(downOrderButton);
+        driver.findElement(downOrderButton).click();
     }
 
-    public void clickButtonOrder (boolean value) {
-        if (value == true) {
-            orderFromHead();
-        } else {
-            orderFromDownPage();
+    public void clickButtonOrder (String value) {
+        switch (value) {
+            case "head":
+                orderFromHead();
+                break;
+            case "down":
+                orderFromDownPage();
+                break;
         }
     }
 }
